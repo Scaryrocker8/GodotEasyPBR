@@ -2,7 +2,7 @@
 
 # GodotEasyPBR
 
-A simple PBR texture generator for fast textures from a single image!
+A simple PBR texture generator created in Godot for fast textures from a single image!
 
 # Features
 
