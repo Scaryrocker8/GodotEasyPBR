@@ -18,9 +18,5 @@ A simple PBR texture generator created in Godot for fast textures from a single 
 
 ![screenshot](screenshot1.png)
 
-# Todo
-
-- Still need to add an algorithm similar to GIMP to create seamless textures in one click!
-
 
 Created by Jonnie Gieringer
