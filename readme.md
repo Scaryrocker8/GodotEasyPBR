@@ -12,6 +12,8 @@ A simple PBR texture generator created in Godot for fast textures from a single 
 
 - Roughness map inverting
 
+- Image size adjustment. From 64x64 up to 4096x4096!
+
 - Maps are saved to a local folder next to the executable for easy access!
 
 ![screenshot](screenshot0.png)
