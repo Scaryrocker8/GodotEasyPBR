@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8vaj8iyqgujv"]
+
+[ext_resource type="Script" uid="uid://bwhe1b0kax65" path="res://scenes/scripts/tiler.gd" id="1_110rd"]
+
+[node name="Tiler" type="Node"]
+script = ExtResource("1_110rd")

@@ -1,0 +1,378 @@
+[gd_scene load_steps=15 format=3 uid="uid://caaab1v2rg4qf"]
+
+[ext_resource type="Script" uid="uid://cclifoyh2ki3q" path="res://scenes/scripts/main.gd" id="1_0wfyh"]
+[ext_resource type="FontFile" uid="uid://3c2y01tbe6d1" path="res://assets/fonts/reenie-beanie/ReenieBeanie.ttf" id="1_o5qli"]
+[ext_resource type="Shader" uid="uid://chd7gy5s3ktqe" path="res://shaders/normal.gdshader" id="3_sugp2"]
+[ext_resource type="Shader" uid="uid://cd1s6hx65e7eg" path="res://shaders/roughness.gdshader" id="4_jyhfs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wfyh"]
+line_spacing = -3.0
+font = ExtResource("1_o5qli")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
+font = ExtResource("1_o5qli")
+font_size = 64
+font_color = Color(0.29411766, 0.29411766, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sugp2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jyhfs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbgi4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tefeu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
+shader = ExtResource("3_sugp2")
+shader_parameter/emboss_height = 0.1
+shader_parameter/bump_height = 0.3
+shader_parameter/blur = 5
+shader_parameter/bump = 60
+shader_parameter/invertX = false
+shader_parameter/invertY = false
+shader_parameter/with_distance = true
+shader_parameter/with_emboss = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_jyhfs"]
+font = ExtResource("1_o5qli")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
+shader = ExtResource("4_jyhfs")
+shader_parameter/weighted = true
+shader_parameter/invert = false
+
+[node name="Main" type="Control" node_paths=PackedStringArray("drag_and_drop_label", "images_container", "new_image_container", "export_viewport", "image_size_container", "image_size_button", "albedo_rect", "tiler", "albedo_tile_seamless_button", "albedo_download_button", "normal_rect", "bump_slider", "normal_download_button", "roughness_rect", "roughness_download_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0wfyh")
+drag_and_drop_label = NodePath("DragAndDropLabel")
+images_container = NodePath("ImagesContainer")
+new_image_container = NodePath("NewImageContainer")
+export_viewport = NodePath("ExportViewport")
+image_size_container = NodePath("ImageSizeContainer")
+image_size_button = NodePath("ImageSizeContainer/ImageSizeButton")
+albedo_rect = NodePath("ImagesContainer/HBoxContainer/AlbedoContainer/AlbedoRect")
+tiler = NodePath("")
+albedo_tile_seamless_button = NodePath("ImagesContainer/HBoxContainer/AlbedoContainer/AlbedoTileSeamlessButton")
+albedo_download_button = NodePath("ImagesContainer/HBoxContainer/AlbedoContainer/AlbedoDownloadButton")
+normal_rect = NodePath("ImagesContainer/HBoxContainer/NormalContainer/NormalRect")
+bump_slider = NodePath("ImagesContainer/HBoxContainer/NormalContainer/BumpSlider")
+normal_download_button = NodePath("ImagesContainer/HBoxContainer/NormalContainer/NormalDownloadButton")
+roughness_rect = NodePath("ImagesContainer/HBoxContainer/RoughnessContainer/RoughnessRect")
+roughness_download_button = NodePath("ImagesContainer/HBoxContainer/RoughnessContainer/RoughnessDownloadButton")
+metadata/_edit_horizontal_guides_ = [590.0]
+metadata/_edit_vertical_guides_ = [1130.0, 22.0]
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DragAndDropLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 350.0
+offset_right = 1050.0
+offset_bottom = 550.0
+rotation = 0.13962634
+text = "Drag and drop 
+image here!
+<-"
+label_settings = SubResource("LabelSettings_0wfyh")
+
+[node name="ImagesContainer" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ImagesContainer"]
+layout_mode = 2
+
+[node name="AlbedoContainer" type="VBoxContainer" parent="ImagesContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="AlbedoRect" type="TextureRect" parent="ImagesContainer/HBoxContainer/AlbedoContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+expand_mode = 1
+
+[node name="AlbedoLabel" type="Label" parent="ImagesContainer/HBoxContainer/AlbedoContainer"]
+layout_mode = 2
+text = "Albedo"
+label_settings = SubResource("LabelSettings_sugp2")
+horizontal_alignment = 1
+
+[node name="AlbedoTileSeamlessButton" type="Button" parent="ImagesContainer/HBoxContainer/AlbedoContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Tile Seamless"
+flat = true
+
+[node name="AlbedoDownloadButton" type="Button" parent="ImagesContainer/HBoxContainer/AlbedoContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Download"
+flat = true
+
+[node name="NormalContainer" type="VBoxContainer" parent="ImagesContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NormalRect" type="TextureRect" parent="ImagesContainer/HBoxContainer/NormalContainer"]
+material = SubResource("ShaderMaterial_jyhfs")
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+expand_mode = 1
+
+[node name="NormalLabel" type="Label" parent="ImagesContainer/HBoxContainer/NormalContainer"]
+layout_mode = 2
+text = "Normal"
+label_settings = SubResource("LabelSettings_sugp2")
+horizontal_alignment = 1
+
+[node name="NormalInvertButton" type="Button" parent="ImagesContainer/HBoxContainer/NormalContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Invert"
+flat = true
+
+[node name="BumpLabel" type="Label" parent="ImagesContainer/HBoxContainer/NormalContainer"]
+layout_mode = 2
+text = "Height"
+label_settings = SubResource("LabelSettings_jyhfs")
+horizontal_alignment = 1
+
+[node name="BumpSlider" type="HSlider" parent="ImagesContainer/HBoxContainer/NormalContainer"]
+layout_mode = 2
+max_value = 1.5
+step = 0.001
+value = 0.1
+
+[node name="NormalDownloadButton" type="Button" parent="ImagesContainer/HBoxContainer/NormalContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Download"
+flat = true
+
+[node name="RoughnessContainer" type="VBoxContainer" parent="ImagesContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="RoughnessRect" type="TextureRect" parent="ImagesContainer/HBoxContainer/RoughnessContainer"]
+material = SubResource("ShaderMaterial_tbgi4")
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+expand_mode = 1
+
+[node name="RoughnessLabel" type="Label" parent="ImagesContainer/HBoxContainer/RoughnessContainer"]
+layout_mode = 2
+text = "Roughness"
+label_settings = SubResource("LabelSettings_sugp2")
+horizontal_alignment = 1
+
+[node name="RoughnessInvertButton" type="Button" parent="ImagesContainer/HBoxContainer/RoughnessContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Invert"
+flat = true
+
+[node name="RoughnessDownloadButton" type="Button" parent="ImagesContainer/HBoxContainer/RoughnessContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Download"
+flat = true
+
+[node name="NewImageContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -217.0
+offset_top = -58.0
+offset_right = -22.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="NewImageButton" type="Button" parent="NewImageContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "New Image!"
+flat = true
+
+[node name="ImageSizeContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -167.5
+offset_right = 167.5
+offset_bottom = 75.0
+grow_horizontal = 2
+
+[node name="ImageSizeButton" type="Button" parent="ImageSizeContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.19793734, 0.19793719, 0.19793722, 1)
+theme_override_colors/font_hover_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Image Size: 512x512"
+flat = true
+
+[node name="AuthorButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -58.0
+offset_right = 475.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Created by Jonnie Gieringer!"
+flat = true
+
+[node name="VersionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 500.0
+offset_top = -58.0
+offset_right = 660.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.39215687, 0.39215687, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sugp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jyhfs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbgi4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
+text = "Version 1.0"
+flat = true
+alignment = 0
+
+[node name="ExportViewport" type="SubViewport" parent="."]
+transparent_bg = true
+render_target_update_mode = 4
+
+[connection signal="pressed" from="ImagesContainer/HBoxContainer/AlbedoContainer/AlbedoTileSeamlessButton" to="." method="_on_albedo_tile_seamless_button_pressed"]
+[connection signal="pressed" from="ImagesContainer/HBoxContainer/AlbedoContainer/AlbedoDownloadButton" to="." method="_on_albedo_download_button_pressed"]
+[connection signal="pressed" from="ImagesContainer/HBoxContainer/NormalContainer/NormalInvertButton" to="." method="_on_normal_invert_button_pressed"]
+[connection signal="value_changed" from="ImagesContainer/HBoxContainer/NormalContainer/BumpSlider" to="." method="_on_bump_slider_value_changed"]
+[connection signal="pressed" from="ImagesContainer/HBoxContainer/NormalContainer/NormalDownloadButton" to="." method="_on_normal_download_button_pressed"]
+[connection signal="pressed" from="ImagesContainer/HBoxContainer/RoughnessContainer/RoughnessInvertButton" to="." method="_on_roughness_invert_button_pressed"]
+[connection signal="pressed" from="ImagesContainer/HBoxContainer/RoughnessContainer/RoughnessDownloadButton" to="." method="_on_roughness_download_button_pressed"]
+[connection signal="pressed" from="NewImageContainer/NewImageButton" to="." method="_on_new_image_button_pressed"]
+[connection signal="pressed" from="ImageSizeContainer/ImageSizeButton" to="." method="_on_image_size_button_pressed"]
