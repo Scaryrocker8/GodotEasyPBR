@@ -18,5 +18,4 @@ A simple PBR texture generator created in Godot for fast textures from a single 
 
 ![screenshot](screenshot1.png)
 
-
 Created by Jonnie Gieringer
